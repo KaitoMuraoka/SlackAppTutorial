@@ -1,0 +1,11 @@
+{
+  "name": "first-bolt-app",
+  "version": "1.0.0",
+  "description": "This is Slack Bolt Tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "KaitoMuraoka",
+  "license": "ISC"
+}

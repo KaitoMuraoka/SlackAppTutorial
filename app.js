@@ -37,6 +37,37 @@ app.message("hello", async ({ message, say }) => {
   });
 });
 
+// "knock knock"を含むメッセージをリッスンし、"Who's there?" というメッセージをイタリック体で送信します。
+app.message('knock knock', async({ message, say }) => {
+  await say(`_Who's there?_`);
+});
+
+// 誰かが 📅 絵文字でリアクションした時に、日付ピッカー block を送信
+app.event('reaction_added', async ({ event, say }) => {
+  if (event.reaction === 'calendar') {
+    await say({
+      blocks: [{
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "Pick a date for me to remind you"
+        },
+        "accessory": {
+          "type": "datepicker",
+          "action_id": "datepicker_remind",
+          "initial_date": "2019-04-28",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Select a date"
+          }
+        }
+      }]
+    });
+  } else {
+    console.log(`Reaction added: ${event.reaction}`);
+  }
+});
+
 app.action("button_click", async ({ body, ack, say }) => {
   //  アクションのリクエストを確認
   await ack();
